@@ -6,7 +6,7 @@ fi
 mkdir -p $1
 # buildPath is fixed, install is defined by user
 buildPath=$HOME/del_build
-mkdir -p $buldPath
+mkdir -p $buildPath
 echo $buildPath
 cd $buildPath
 git clone -b R1 https://github.com/foresthz/tmux.git
