@@ -26,14 +26,14 @@ cd libevent
 make
 make install
 
-check()
+check
 
 echo "build tmux"
 cd $buildPath/tmux
 ./autogen.sh
 ./configure CFLAGS=-I$1/include LDFLAGS=-L$1/lib --prefix=$1
 
-check()
+check
 
 make
 make install
