@@ -1,4 +1,4 @@
-
+build_tmux_func(){
 if [ -z $1 ];then
 echo "input install path"
 exit
@@ -23,6 +23,10 @@ make
 make install
 if [ $? = 0 ];then
   echo "success!";
+  echo "now you should specify export LD_LIBRARY_PATH=`echo $1`:$LD_LIBRARY_PATH"
 else
   echo "failed";
 fi
+}
+
+time build_tmux_func $1
