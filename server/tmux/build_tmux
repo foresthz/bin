@@ -3,10 +3,10 @@ if [ -z $1 ];then
 echo "input install path"
 exit
 fi
-mkdir -p $1
+mkdir -pv $1
 # buildPath is fixed, install is defined by user
 buildPath=$HOME/del_build
-mkdir -p $buildPath
+mkdir -pv $buildPath
 echo $buildPath
 cd $buildPath
 git clone -b R1 https://github.com/foresthz/tmux.git
