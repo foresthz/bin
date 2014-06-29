@@ -1,0 +1,4 @@
+tmux -L l a -d
+if [ $? = 1 ]; then
+tmux -L l
+fi

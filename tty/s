@@ -1,0 +1,4 @@
+screen -dr s
+if [ $? = 1 ]; then
+screen -S s
+fi

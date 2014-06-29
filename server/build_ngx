@@ -1,0 +1,5 @@
+cd $HOME/code/libevent/
+./autogen.sh
+./configure --prefix=$HOME/ins/
+make
+make install

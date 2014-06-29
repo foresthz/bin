@@ -1,0 +1,7 @@
+bin=$HOME/bin
+INS=$HOME/ins
+binPATH=$bin:$bin/tty:$INS/bin:$INS/sbin
+export PATH=$binPATH:$PATH
+
+export LD_LIBRARY_PATH=$HOME/ins/lib:$LD_LIBRARY_PATH
+alias ls='ls --color'
