@@ -1,0 +1,42 @@
+
+echo '+++++++++++++++++++ this script is used to synchronize github mirror'
+curdir=`pwd`
+syncDir=$HOME/tmp/sync
+
+echo "syncDir is $syncDir"
+
+if [ -d $syncDir ]; then
+echo "folder $syncDir already exist ++++++ ";
+else
+mkdir -pv $syncDir
+fi
+if [ -f sync_mirror ]; then
+mirror_url=`cat sync_mirror | grep mirror | awk '{print $2}' `
+github_url=`cat sync_mirror | grep github | awk '{print $2}' `
+echo "mirror_url is $mirror_url"
+echo "github_url is $github_url"
+else
+echo "no mirror file specified, you should have a file named sync_mirror"
+fi
+
+cd $syncDir
+folderName=`basename $mirror_url`
+if [ -d $folderName ];then
+echo 'mirror already existed'
+else
+git clone --mirror $mirror_url
+fi
+
+cd $folderName
+echo "++++++++ fetch all"
+git fetch --all
+#git pull origin --all
+
+git remote -v | grep github
+if [ $? = 1 ]; then
+git remote add github $github_url
+fi
+echo "+++++++++++ push to github"
+git push github --all
+
+

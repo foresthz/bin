@@ -1,0 +1,33 @@
+check(){
+if [ $1 -ne 0 ]; then
+echo "failed";
+exit
+else
+echo "success!"
+fi
+}
+
+
+build_openvpn_func(){
+if [ -z $1 ];then
+echo "input install path"
+exit
+fi
+mkdir -pv $1
+# buildPath is fixed, install is defined by user
+buildPath=$HOME/del_build
+mkdir -pv $buildPath
+echo $buildPath
+cd $buildPath
+# it's used to build , not for development , so use https instead of git protocol
+git clone -b R1 https://github.com/foresthz/openvpn/ 
+cd openvpn
+autoreconf -i -v
+check $?
+./configure --prefix=$1
+make
+make install
+
+check $?
+}
+time build_openvpn_func $1

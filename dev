@@ -1,0 +1,37 @@
+check(){
+if [ $1 -ne 0 ]; then
+echo "failed";
+exit
+fi
+}
+
+category="[work|vpn]"
+
+init_dev(){
+if [ $# -lt 2 ]; then
+echo "too less argumetns"
+echo "you should input {initPath} { category $category }"
+exit
+fi
+
+mkdir -pv $1
+cd $1
+if [ $2 = "work" ];then
+git clone git@github.com:foresthz/linuxc.git
+git clone git@github.com:foresthz/bin.git
+git clone git@github.com:foresthz/shell.git
+check $?
+# need one then clause here
+elif [ $2 = "vpn" ]; then
+git clone -b R1 git@github.com:foresthz/xl2tpd.git
+git clone -b R1 git@github.com:foresthz/openvpn.git
+git clone -b R1 git@github.com:foresthz/goagent.git
+check $?
+else
+echo "the category you input should be inside $category"
+exit 
+fi
+}
+
+
+time init_dev $@
