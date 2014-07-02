@@ -5,7 +5,7 @@ exit
 fi
 }
 
-category="[work|vpn]"
+category="[work|vpn|server]"
 
 init_dev(){
 if [ $# -lt 2 ]; then
@@ -26,6 +26,11 @@ elif [ $2 = "vpn" ]; then
 git clone -b R1 git@github.com:foresthz/xl2tpd.git
 git clone -b R1 git@github.com:foresthz/openvpn.git
 git clone -b R1 git@github.com:foresthz/goagent.git
+check $?
+elif [ $2 = "server" ]; then
+git clone -b R1 git@github.com:foresthz/libevent.git
+git clone -b R1 git@github.com:foresthz/nginx.git
+git clone -b R1 git@github.com:foresthz/php-src.git
 check $?
 else
 echo "the category you input should be inside $category"
