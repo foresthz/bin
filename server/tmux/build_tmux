@@ -18,8 +18,25 @@ mkdir -pv $buildPath
 echo $buildPath
 cd $buildPath
 # it's used to build , not for development , so use https instead of git protocol
+
+echo "++++++++++ if code is already there, don't clone just update it"
+if [ -d tmux ]; then
+cd tmux
+git pull
+else
 git clone -b R1 https://github.com/foresthz/tmux.git
+fi
+
+cd $buildPath
+if [ -d libevent ]; then
+cd libevent
+git pull
+else
 git clone -b R1 https://github.com/foresthz/libevent
+fi
+
+cd $buildPath
+
 cd libevent
 ./autogen.sh
 ./configure --prefix=$1
