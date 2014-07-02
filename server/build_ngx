@@ -1,5 +1,67 @@
-cd $HOME/code/libevent/
+check(){
+if [ $1 -ne 0 ]; then
+echo "failed";
+exit
+fi
+}
+
+
+build_ngx_func(){
+if [ -z $1 ];then
+echo "input install path"
+exit
+fi
+mkdir -pv $1
+# buildPath is fixed, install is defined by user
+buildPath=$HOME/del_build
+mkdir -pv $buildPath
+echo $buildPath
+cd $buildPath
+# it's used to build , not for development , so use https instead of git protocol
+
+echo "++++++++++ if code is already there, don't clone just update it"
+if [ -d nginx ]; then
+cd nginx
+git pull
+else
+git clone -b R1 https://github.com/foresthz/nginx.git
+fi
+
+cd $buildPath
+if [ -d libevent ]; then
+cd libevent
+git pull
+else
+git clone -b R1 https://github.com/foresthz/libevent
+fi
+
+cd $buildPath
+
+cd libevent
 ./autogen.sh
-./configure --prefix=$HOME/ins/
+./configure --prefix=$1
 make
 make install
+
+check $?
+
+echo "build ngx"
+cd $buildPath/nginx
+./configure --prefix=$1
+
+# no CFLAGS option her, if added, configure will fail
+#./configure CFLAGS=-I$1/include LDFLAGS=-L$1/lib --prefix=$1
+
+check $?
+
+make
+make install
+if [ $? = 0 ];then
+  echo "success!";
+  echo "now you should specify export LD_LIBRARY_PATH=`echo $1`:$LD_LIBRARY_PATH"
+else
+  echo "failed";
+fi
+}
+
+time build_ngx_func $1
