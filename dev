@@ -19,6 +19,7 @@ cd $1
 if [ $2 = "work" ];then
 git clone git@github.com:foresthz/linuxc.git
 git clone git@github.com:foresthz/bin.git
+git clone git@github.com:foresthz/autotool.git
 git clone git@github.com:foresthz/shell.git
 check $?
 # need one then clause here
