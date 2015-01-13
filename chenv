@@ -1,4 +1,6 @@
-bin=$HOME/bin
+bin=`dirname $(readlink -f ${BASH_SOURCE[@]})`
+#bin=$(readlink -f .)
+#bin=$HOME/bin
 INS=$HOME/ins
 binPATH=$bin:$bin/tty:$INS/bin:$INS/sbin
 export PATH=$binPATH:$PATH
