@@ -1,4 +1,15 @@
+
+if [ $SHELL = '/bin/bash' ]; then
+echo "using bash"
 bin=`dirname $(readlink -f ${BASH_SOURCE[@]})`
+elif [ $SHELL = '/usr/bin/zsh' ]; then
+echo "using zsh"
+bin=`dirname ${(%):-%x}`
+else
+echo "not bash or zsh" && exit 1
+fi
+
+echo $bin
 #bin=$(readlink -f .)
 #bin=$HOME/bin
 INS=$HOME/ins
