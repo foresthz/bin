@@ -1,4 +1,5 @@
-tmux -L l a -d
+TMUX_NAME=`whoami`
+tmux -L $TMUX_NAME a -d
 if [ $? = 1 ]; then
-tmux -L l
+tmux -L $TMUX_NAME
 fi
