@@ -1,5 +1,21 @@
+
+enter_cli() {
+  tmux -L $1 a -d
+  if [ $? = 1 ]; then
+    tmux -L $1
+  fi
+}
+
 TMUX_NAME=`whoami`
-tmux -L $TMUX_NAME a -d
-if [ $? = 1 ]; then
-tmux -L $TMUX_NAME
+if [ $# -eq 0 ]; then 
+  enter_cli $TMUX_NAME
+else
+  if [ $1 = "list" ] || [ $1 = "l" ]; then
+     ps ax | grep tmux
+  else
+     TMUX_NAME=$1
+     enter_cli $TMUX_NAME
+  fi
 fi
+
+
