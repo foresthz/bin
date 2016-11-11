@@ -1,5 +1,5 @@
 
-if [ $SHELL = '/bin/bash' ]; then
+if [ $SHELL = '/bin/bash' ] || [ $SHELL = 'bash' ]; then
 echo "using bash"
 bin=`dirname $(readlink -f ${BASH_SOURCE[@]})`
 elif [ $SHELL = '/usr/bin/zsh' ]; then
