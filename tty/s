@@ -1,4 +1,6 @@
-screen -dr s
+screen_name=`whoami`
+echo $screen_name
+screen -dr $screen_name
 if [ $? = 1 ]; then
-screen -S s
+screen -S $screen_name
 fi
