@@ -1,0 +1,7 @@
+#!/bin/bash
+function root() {
+root=$(git rev-parse --show-toplevel)
+echo 'root:' $root
+cd $root
+}
+root
